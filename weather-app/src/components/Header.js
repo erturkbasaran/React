@@ -6,16 +6,12 @@ const Header = () => {
 
     const { setCity } = useCity();
 
-    const handleChange = (e) => {
-        setCity(e)
-    }
-
     return (
         <div className="header">
 
             <h1>Please select a city</h1>
 
-            <select onChange={(e) => handleChange(JSON.parse(e.target.value))}>
+            <select onChange={(e) => setCity(JSON.parse(e.target.value))}>
                 {
                     cities.map(city => (
                         <option
