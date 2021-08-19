@@ -13,18 +13,18 @@ const WeatherWrapper = () => {
 
     const { city } = useCity();
 
-    useEffect(() => {
+    const getData = async (city) => {
+        try {
 
-        const getData = async (city) => {
-            try {
+            const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${city.latitude}&lon=${city.longitude}&exclude=current,hourly,minutely,alerts&units=metric&appid=b4c59051f4eb9bff86631c58fefc7156`)
+            setData(response.data.daily)
 
-                const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${city.latitude}&lon=${city.longitude}&exclude=current,hourly,minutely,alerts&units=metric&appid=b4c59051f4eb9bff86631c58fefc7156`)
-                setData(response.data.daily)
+        } catch (error) {
 
-            } catch (error) {
-
-            }
         }
+    }
+
+    useEffect(() => {
 
         getData(city);
 
